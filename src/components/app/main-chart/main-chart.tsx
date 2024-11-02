@@ -23,19 +23,19 @@ export function MainChart({ className }: IGrossBalance) {
         "w-5/12 border p-4 rounded-[26px] bg-white shadow-md flex items-center gap-4 justify-center"
       )}
     >
-      <div className="relative flex flex-col w-6/12">
+      <div className="relative flex flex-col w-8/12">
         <PieChart data={data} />
         <div className="absolute top-0 left-0 z-0 flex items-center justify-center w-full h-full">
-          <p className="text-[12px] font-bold hover:scale-105 transition-all cursor-pointer">
+          <p className="text-[12px] font-extrabold hover:scale-105 transition-all cursor-pointer">
             {formatCurrency(totalValue)}
           </p>
         </div>
       </div>
-      <div className="grid w-7/12 grid-cols-2 gap-4">
-        {data.map((each, i) => (
+      <div className="grid w-6/12 grid-cols-2 gap-4">
+        {data.map((each) => (
           <div
             className="flex flex-col items-center justify-start w-full"
-            key={i}
+            key={each.name}
           >
             <div className="flex items-start justify-start w-full gap-2">
               <div

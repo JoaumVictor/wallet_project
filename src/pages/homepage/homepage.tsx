@@ -1,3 +1,4 @@
+import { AssetsList } from "@/components/app/assets-list/assets-list";
 import { Breadcrumb } from "@/components/app/breadcrumb/breadcrumb";
 import { Footer } from "@/components/app/footer/footer";
 import { GrossBalance } from "@/components/app/gross-balance/gross-balance";
@@ -8,16 +9,16 @@ import { AlignmentContainer } from "@/components/ui/alignment-container/alignmen
 
 export function HomePage() {
   return (
-    <AlignmentContainer className="flex flex-col items-center justify-start w-full h-screen gap-4 p-10 bg-gray-5">
+    <AlignmentContainer className="flex flex-col items-center justify-start w-full min-h-screen gap-4 p-10 bg-gray-5">
       <Breadcrumb breadcrumbPath={["Meus investimentos"]} />
       <section className="grid w-full grid-cols-3 gap-4">
         <GrossBalance />
         <TotalOfAssets />
         <Movements />
       </section>
-      <section className="w-full h-[400px]">
+      <section className="flex w-full gap-4">
         <MainChart />
-        {/* <AssetsList /> */}
+        <AssetsList />
       </section>
       <Footer />
     </AlignmentContainer>

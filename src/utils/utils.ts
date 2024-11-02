@@ -8,3 +8,7 @@ export const formatCurrency = (value: number): string => {
     currency: "BRL",
   }).format(value);
 };
+
+export const sliceText = (text: string, value: number) => {
+  return text.length > value ? `${text.slice(0, value)}...` : text;
+};
