@@ -11,7 +11,7 @@
 
 @layer base {
   body {
-    background-color: #1a1a1a;
+    background-color: #c2c2c2;
     font-family: "Poppins", sans-serif;
     @apply text-gray-0;
   }

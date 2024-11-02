@@ -9,14 +9,14 @@ import { AlignmentContainer } from "@/components/ui/alignment-container/alignmen
 
 export function HomePage() {
   return (
-    <AlignmentContainer className="flex flex-col items-center justify-start w-full min-h-screen gap-4 p-10 bg-gray-5">
+    <AlignmentContainer className="flex flex-col items-center justify-start w-full min-h-screen gap-4 p-10">
       <Breadcrumb breadcrumbPath={["Meus investimentos"]} />
       <section className="grid w-full grid-cols-3 gap-4">
         <GrossBalance />
         <TotalOfAssets />
         <Movements />
       </section>
-      <section className="flex w-full gap-4">
+      <section className="flex w-full gap-4 h-[520px]">
         <MainChart />
         <AssetsList />
       </section>

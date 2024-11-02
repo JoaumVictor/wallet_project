@@ -12,6 +12,7 @@ export const theme = {
       },
       black: "#000000",
       white: "#ffffff",
+      smoke: "rgba(233, 236, 239, 1)",
       gray: {
         0: "rgba(74, 82, 96, 1)",
         1: "#f8f9fa",
