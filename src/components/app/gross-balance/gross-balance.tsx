@@ -1,11 +1,11 @@
-import { cn } from "@/utils/utils";
+import { cn, formatCurrency } from "@/utils/utils";
 
 interface IGrossBalance {
   className?: string;
 }
 
 export function GrossBalance({ className }: IGrossBalance) {
-  const totalValue = 4399;
+  const totalValue = 321547.58;
 
   return (
     <div
@@ -15,7 +15,9 @@ export function GrossBalance({ className }: IGrossBalance) {
       )}
     >
       <p className="font-bold">Saldo bruto</p>
-      <p className="text-lg font-bold text-black">R$ {totalValue}</p>
+      <p className="text-lg font-bold text-black">
+        {formatCurrency(totalValue)}
+      </p>
     </div>
   );
 }
