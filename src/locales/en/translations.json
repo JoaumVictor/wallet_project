@@ -1,0 +1,46 @@
+{
+  "common": {},
+  "private": {
+    "homepage": {
+      "breadcrumb": {
+        "my-investments": "My Investments"
+      },
+      "gross-balance": {
+        "title": "Gross Balance"
+      },
+      "total-of-assets": {
+        "title": "Total Assets"
+      },
+      "movements": {
+        "title": "Monthly Movements",
+        "buys": "Buys",
+        "sales": "Sales"
+      },
+      "main-chart": {
+        "types": {
+          "stock": "Stocks",
+          "fii": "Funds",
+          "fixed-income": "Fixed Income",
+          "crypto": "Crypto"
+        }
+      },
+      "assets-list": {
+        "title": "Assets List",
+        "add-asset": "Add Asset",
+        "placeholder": "Search asset",
+        "current-balance": "Current Balance:",
+        "quantity": "Quantity:",
+        "new-buy": "New Buy",
+        "new-sale": "New Sale",
+        "delete": "Delete",
+        "showing": "Showing",
+        "result": "result",
+        "results": "results"
+      },
+      "footer": {
+        "title": "all rights reserved"
+      }
+    }
+  },
+  "public": {}
+}

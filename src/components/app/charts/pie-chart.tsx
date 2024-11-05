@@ -30,6 +30,6 @@ export function PieChart({ data }: IPieChart) {
   };
 
   return (
-    <ReactECharts option={option} style={{ height: "240px", width: "100%" }} />
+    <ReactECharts option={option} style={{ height: "360px", width: "100%" }} />
   );
 }

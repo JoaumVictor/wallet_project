@@ -52,10 +52,10 @@ export const theme = {
       },
     },
     fontFamily: {
-      sans: ["Poppins", "sans-serif"],
+      sans: ["Quicksand", "sans-serif"],
     },
     fontWeight: {
-      bold: "500",
+      bold: "700",
     },
   },
 };

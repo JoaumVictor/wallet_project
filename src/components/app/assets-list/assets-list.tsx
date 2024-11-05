@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import {
   FaAngleDoubleLeft,
@@ -10,21 +10,28 @@ import {
 import { Button } from "@/components/ui/button/button";
 import { AssetCard } from "./components/asset-card";
 import { cn } from "@/utils/utils";
-import getUserLogs from "@/utils/mock";
 import { ItemsPerPageSelect } from "../items-per-page/items-per-page";
+import { AddAssetDialog } from "../dialogs/add-asset-dialog/add-asset-dialog";
+import { usePortfolio } from "@/context/assets-context";
+import { useTranslation } from "react-i18next";
 
 interface IGrossBalance {
   className?: string;
 }
 
 export function AssetsList({ className }: IGrossBalance) {
+  const { t } = useTranslation();
   const [filterByName, setFilterByName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItensPerPage] = useState(5);
 
-  const filteredLogs = getUserLogs.filter((each) =>
-    each.name.toLowerCase().includes(filterByName.toLowerCase())
-  );
+  const { assets } = usePortfolio();
+
+  const filteredLogs = useMemo(() => {
+    return assets?.filter((each) =>
+      each.name.toLowerCase().includes(filterByName.toLowerCase())
+    );
+  }, [assets, filterByName]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = filteredLogs.slice(
@@ -36,23 +43,25 @@ export function AssetsList({ className }: IGrossBalance) {
     <div
       className={cn(
         className,
-        "w-7/12 border p-4 rounded-[26px] bg-white shadow-md flex items-start gap-4 justify-between flex-col"
+        "w-full lg:w-[53%] max-h-[750px] border p-4 rounded-[26px] bg-white shadow-md flex items-start gap-4 justify-between flex-col"
       )}
     >
       <div className="grid flex-col w-full grid-cols-2 gap-2">
-        <h1>Lista de ativos</h1>
+        <h1 className="font-bold">{t("private.homepage.assets-list.title")}</h1>
         <div className="flex justify-end w-full col-span-1">
-          <Button
-            className="!text-[12px]"
-            leftIcon={<FaPlus className="mr-2 text-[11px]" />}
-            size="sm"
-          >
-            Adicionar Ativo
-          </Button>
+          <AddAssetDialog>
+            <Button
+              className="!text-[12px]"
+              leftIcon={<FaPlus className="mr-2 text-[11px]" />}
+              size="sm"
+            >
+              {t("private.homepage.assets-list.add-asset")}
+            </Button>
+          </AddAssetDialog>
         </div>
         <input
           type="text"
-          placeholder="Buscar ativo"
+          placeholder={t("private.homepage.assets-list.placeholder")}
           className="p-2 text-[13px] rounded-lg outline-none border-gray-6 bg-slate-100"
           value={filterByName}
           onChange={(e) => {
@@ -71,9 +80,11 @@ export function AssetsList({ className }: IGrossBalance) {
       <div className="flex items-center justify-between w-full mt-4">
         <div className="w-6/12">
           <p className="text-sm">
-            Mostrando {currentItems.length}{" "}
+            {t("private.homepage.assets-list.showing")} {currentItems.length}{" "}
             <span className="font-bold">
-              {currentItems.length === 1 ? "resultado" : "resultados"}
+              {currentItems.length === 1
+                ? t("private.homepage.assets-list.result")
+                : t("private.homepage.assets-list.results")}
             </span>
           </p>
         </div>

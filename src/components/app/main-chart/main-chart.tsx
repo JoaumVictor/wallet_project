@@ -1,53 +1,52 @@
 import { cn, formatCurrency } from "@/utils/utils";
 import { PieChart } from "../charts/pie-chart";
 import colors from "@/utils/colors";
-import getUserLogs from "@/utils/mock";
+import { usePortfolio } from "@/context/assets-context";
+import { useCallback, useMemo } from "react";
+import { ChartCard } from "./components/chart-card";
 
 interface IGrossBalance {
   className?: string;
 }
 
 export function MainChart({ className }: IGrossBalance) {
-  const totalValue = 321547.58;
+  const { assets, portfolio } = usePortfolio();
 
-  const data = getUserLogs.map((each, i) => ({
-    value: each.value,
-    name: each.name,
-    itemStyle: { color: colors[i] ?? colors[0] },
-  }));
+  const data = useMemo(() => {
+    const types = ["Ação", "Cripto", "Fundo", "Tesouro"];
+    return types.map((type, i) => ({
+      value: assets
+        .filter((each) => each.type === type)
+        .reduce((acc, each) => each.value * each.quantity + acc, 0),
+      name: type,
+      itemStyle: { color: colors[i] },
+    }));
+  }, [assets]);
+
+  const formattedBalance = useCallback(
+    () => formatCurrency(portfolio.grossBalance),
+    [portfolio.grossBalance]
+  );
 
   return (
     <div
       className={cn(
         className,
-        "w-5/12 border p-4 rounded-[26px] bg-white shadow-md flex items-center gap-4 justify-center"
+        "w-full lg:w-[45%] pr-0 lg:pr-5 rounded-[26px] flex-col lg:flex-row bg-white shadow-md flex items-center justify-center lg:max-h-[360px] pb-10 lg:pb-0"
       )}
     >
-      <div className="relative flex flex-col w-8/12">
+      <div className="relative flex flex-col w-full lg:w-3/5">
         <PieChart data={data} />
-        <div className="absolute top-0 left-0 z-0 flex items-center justify-center w-full h-full">
+        <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
           <p className="text-[12px] font-extrabold hover:scale-105 transition-all cursor-pointer">
-            {formatCurrency(totalValue)}
+            {formattedBalance()}
           </p>
         </div>
       </div>
-      <div className="grid w-6/12 grid-cols-2 gap-4">
-        {data.map((each) => (
-          <div
-            className="flex flex-col items-center justify-start w-full"
-            key={each.name}
-          >
-            <div className="flex items-start justify-start w-full gap-2">
-              <div
-                style={{ backgroundColor: each.itemStyle.color }}
-                className="w-[8px] h-[8px] mt-1 rounded-full"
-              />
-              <p className="text-[12px] font-bold w-10/12">{each.name}</p>
-            </div>
-            <p className="w-full text-sm font-bold ml-7">
-              {formatCurrency(each.value)}
-            </p>
-          </div>
+
+      <div className="flex flex-wrap items-center justify-center w-full p-10 lg:p-0 lg:w-2/5">
+        {data.map((each, i) => (
+          <ChartCard data={each} key={i} />
         ))}
       </div>
     </div>

@@ -1,0 +1,46 @@
+{
+  "common": {},
+  "private": {
+    "homepage": {
+      "breadcrumb": {
+        "my-investments": "Meus investimentos"
+      },
+      "gross-balance": {
+        "title": "Saldo bruto"
+      },
+      "total-of-assets": {
+        "title": "Total de ativos"
+      },
+      "movements": {
+        "title": "Movimentações do mês",
+        "buys": "compras",
+        "sales": "vendas"
+      },
+      "main-chart": {
+        "types": {
+          "stock": "Ações",
+          "fii": "Fundos",
+          "fixed-income": "Renda fixa",
+          "crypto": "Cripto"
+        }
+      },
+      "assets-list": {
+        "title": "Lista de ativos",
+        "add-asset": "Adicionar Ativo",
+        "placeholder": "Buscar ativo",
+        "current-balance": "Saldo atual:",
+        "quantity": "Quantidade:",
+        "new-buy": "Nova compra",
+        "new-sale": "Nova venda",
+        "delete": "Excluir",
+        "showing": "Monstrando",
+        "result": "resultado",
+        "results": "resultados"
+      },
+      "footer": {
+        "title": "todos os direitos reservados"
+      }
+    }
+  },
+  "public": {}
+}

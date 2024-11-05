@@ -1,7 +1,8 @@
 import { AssetData } from "@/types/assets";
 import colors from "@/utils/colors";
 import { formatCurrency, sliceText } from "@/utils/utils";
-import { RxDotsHorizontal } from "react-icons/rx";
+import { DropdownActions } from "./dropdown-menu";
+import { useTranslation } from "react-i18next";
 
 interface IAssetCard {
   data: AssetData;
@@ -9,10 +10,16 @@ interface IAssetCard {
 }
 
 export function AssetCard({ data, index }: IAssetCard) {
+  const { t } = useTranslation();
+
   const totalValue = data.value * data.quantity;
 
+  const teste = () => {
+    return;
+  };
+
   return (
-    <div className="flex items-center justify-start w-full gap-2 p-4 rounded-lg bg-slate-100">
+    <div className="flex items-center justify-start w-full gap-2 p-4 rounded-lg shadow-sm bg-slate-50">
       <div
         style={{ backgroundColor: colors[index] }}
         className="flex items-center justify-center rounded-full w-9 h-9"
@@ -26,20 +33,19 @@ export function AssetCard({ data, index }: IAssetCard) {
 
       <div className="w-1/4">
         <p className="text-[12px]">
-          Saldo atual:{" "}
+          {t("private.homepage.assets-list.current-balance")}{" "}
           <span className="font-extrabold">{formatCurrency(totalValue)}</span>
         </p>
       </div>
 
       <div className="w-1/4">
         <p className="text-[12px]">
-          Quantidade: <span className="font-extrabold">{data.quantity}</span>
+          {t("private.homepage.assets-list.quantity")}{" "}
+          <span className="font-extrabold">{data.quantity}</span>
         </p>
       </div>
 
-      <div className="px-2 py-1 transition-all rounded-lg cursor-pointer bg-slate-200 hover:scale-x-110 hover:bg-slate-300">
-        <RxDotsHorizontal />
-      </div>
+      <DropdownActions onBuy={teste} onDelete={teste} onSell={teste} />
     </div>
   );
 }

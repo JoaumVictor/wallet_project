@@ -1,10 +1,17 @@
-const getUserLogs = [
+const getUserAssetsMock = [
   {
     code: "TD",
     name: "Tesouro Selic 2026 (LFT)",
     type: "Tesouro",
-    value: 110.24,
-    quantity: 150,
+    value: 10.24,
+    quantity: 15,
+  },
+  {
+    code: "TI",
+    name: "Tesouro IPCA 2029",
+    type: "Tesouro",
+    value: 80,
+    quantity: 40,
   },
   {
     code: "AC",
@@ -18,35 +25,35 @@ const getUserLogs = [
     name: "VISC11 - FII VINCI SC",
     type: "Fundo",
     value: 26.3,
-    quantity: 130,
+    quantity: 13,
   },
   {
     code: "BBAS3",
     name: "Banco do Brasil S.A.",
     type: "Ação",
     value: 42.15,
-    quantity: 60,
+    quantity: 3,
   },
   {
     code: "BBDC4",
     name: "Bradesco PN",
     type: "Ação",
     value: 13.4,
-    quantity: 120,
+    quantity: 12,
   },
   {
     code: "SANB11",
     name: "Santander BR Units",
     type: "Ação",
     value: 32.5,
-    quantity: 90,
+    quantity: 22,
   },
   {
     code: "MXRF11",
     name: "FII Maxi Renda",
     type: "Fundo",
     value: 10.02,
-    quantity: 200,
+    quantity: 5,
   },
   {
     code: "RURA11",
@@ -60,15 +67,15 @@ const getUserLogs = [
     name: "FII Kinea Rendimentos",
     type: "Fundo",
     value: 96.3,
-    quantity: 80,
+    quantity: 9,
   },
   {
     code: "ETH",
     name: "Ethereum",
     type: "Cripto",
     value: 1600.45,
-    quantity: 0.75,
+    quantity: 1,
   },
 ];
 
-export default getUserLogs;
+export default getUserAssetsMock;
