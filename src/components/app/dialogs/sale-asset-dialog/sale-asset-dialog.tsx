@@ -164,7 +164,10 @@ export function SaleAssetDialog({
             </div>
 
             <Dialog.Close asChild>
-              <button className="absolute transition-all top-4 right-4 hover:scale-125">
+              <button
+                onClick={() => formik.setErrors({})}
+                className="absolute transition-all top-4 right-4 hover:scale-125"
+              >
                 <IoMdClose className="text-[26px]" />
               </button>
             </Dialog.Close>

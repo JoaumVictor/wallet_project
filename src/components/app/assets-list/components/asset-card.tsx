@@ -25,7 +25,7 @@ export function AssetCard({ data, index }: IAssetCard) {
     <div className="flex items-center justify-start w-full gap-2 p-4 rounded-lg shadow-sm bg-slate-50">
       <div
         style={{ backgroundColor: colors[index] }}
-        className="flex items-center justify-center rounded-full w-9 h-9"
+        className="items-center justify-center hidden rounded-full sm:flex w-9 h-9"
       >
         <p className="text-black text-[12px]">{data.code.slice(0, 2)}</p>
       </div>

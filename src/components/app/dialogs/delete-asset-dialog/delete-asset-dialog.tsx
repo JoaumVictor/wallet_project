@@ -30,7 +30,7 @@ export function DeleteAssetDialog({
           className="fixed inset-0 flex items-center justify-center p-4"
           aria-labelledby="modal-title"
         >
-          <div className="flex flex-col items-center justify-center gap-10 p-10 bg-white rounded-xl">
+          <div className="flex flex-col items-center justify-center w-full max-w-[500px] gap-10 p-10 bg-white rounded-xl">
             <Dialog.Title id="modal-title" className="text-xl font-bold">
               {t("private.homepage.assets-list.dialogs.delete-asset.title")}{" "}
               {assetName}?

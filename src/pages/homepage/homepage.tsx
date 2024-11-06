@@ -14,7 +14,7 @@ export function HomePage() {
   const breadcrumbPath = [t("private.homepage.breadcrumb.my-investments")];
 
   return (
-    <AlignmentContainer className="flex flex-col items-center justify-start w-full min-h-screen gap-4 p-10">
+    <AlignmentContainer className="flex flex-col items-center justify-start w-full min-h-screen gap-4 p-4 md:p-10">
       <ChangeLanguage />
       <Breadcrumb breadcrumbPath={breadcrumbPath} />
       <section className="grid w-full grid-cols-2 gap-4 md:grid-cols-3">

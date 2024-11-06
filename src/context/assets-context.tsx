@@ -1,6 +1,8 @@
 /* eslint-disable no-case-declarations */
 import { AssetData } from "@/types/assets";
+import { IMovementLog } from "@/types/movements";
 import getUserAssetsMock from "@/utils/mock";
+import { localDateInStringFormat } from "@/utils/utils";
 import React, {
   createContext,
   useContext,
@@ -20,6 +22,7 @@ interface PortfolioContextProps {
     value: number
   ) => void;
   handleRemoveAsset: (assetName: string, quantity: number) => void;
+  movementLogs: IMovementLog[];
 }
 
 interface IPortfolio {
@@ -37,6 +40,11 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [assets, setAssets] = useState<AssetData[]>([]);
   const [portfolio, setPortfolio] = useState<IPortfolio>({} as IPortfolio);
+  const [movementLogs, setMovementLogs] = useState<IMovementLog[]>([]);
+
+  const createMovementLog = (data: IMovementLog) => {
+    setMovementLogs([...movementLogs, data]);
+  };
 
   const handleDeleteAsset = (assetName: string) => {
     const data = assets.filter((each) => each.name !== assetName);
@@ -53,6 +61,12 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({
     findAsset.value = value;
     const assetsFiltered = assets.filter((each) => each.name !== name);
     updatePortfolio([...assetsFiltered, findAsset]);
+    createMovementLog({
+      name,
+      quantity,
+      type: "buy",
+      date: localDateInStringFormat(),
+    });
   };
 
   const handleRemoveAsset = (name: string, quantity: number) => {
@@ -68,6 +82,12 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({
     findAsset.quantity = findAsset?.quantity - quantity;
     const assetsFiltered = assets.filter((each) => each.name !== name);
     updatePortfolio([...assetsFiltered, findAsset]);
+    createMovementLog({
+      name,
+      quantity,
+      type: "sale",
+      date: localDateInStringFormat(),
+    });
   };
 
   const handleAddAsset = (newAsset: AssetData) => {
@@ -107,6 +127,12 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({
         prevPortfolio.grossBalance + newAsset.value * newAsset.quantity,
       totalAssets: prevPortfolio.totalAssets + newAsset.quantity,
     }));
+    createMovementLog({
+      name: newAsset.name,
+      quantity: newAsset.quantity,
+      type: "buy",
+      date: localDateInStringFormat(),
+    });
   };
 
   const getPortfolio = () => {
@@ -151,6 +177,7 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({
         handleDeleteAsset,
         handleUpdateAsset,
         handleRemoveAsset,
+        movementLogs,
       }}
     >
       {children}

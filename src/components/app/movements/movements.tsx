@@ -1,4 +1,6 @@
+import { usePortfolio } from "@/context/assets-context";
 import { cn } from "@/utils/utils";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 interface IGrossBalance {
@@ -7,8 +9,25 @@ interface IGrossBalance {
 
 export function Movements({ className }: IGrossBalance) {
   const { t } = useTranslation();
-  const buys = 0;
-  const sales = 0;
+  const { movementLogs } = usePortfolio();
+
+  const buys = useMemo(
+    () =>
+      movementLogs.reduce(
+        (acc, each) => (each.type === "buy" ? acc + 1 : acc),
+        0
+      ),
+    [movementLogs]
+  );
+
+  const sales = useMemo(
+    () =>
+      movementLogs.reduce(
+        (acc, each) => (each.type === "sale" ? acc + 1 : acc),
+        0
+      ),
+    [movementLogs]
+  );
 
   return (
     <div

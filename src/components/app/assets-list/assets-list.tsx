@@ -85,9 +85,9 @@ export function AssetsList({ className }: IGrossBalance) {
           ))}
       </div>
 
-      <div className="flex items-center justify-between w-full mt-4">
-        <div className="w-6/12">
-          <p className="text-sm">
+      <div className="flex flex-col items-center justify-between w-full gap-5 mt-4 md:flex-row md:gap-0">
+        <div className="w-full md:w-6/12">
+          <p className="text-sm text-center md:text-start">
             {t("private.homepage.assets-list.showing")} {currentItems.length}{" "}
             <span className="font-bold">
               {currentItems.length === 1

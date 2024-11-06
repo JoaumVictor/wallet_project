@@ -69,6 +69,7 @@ export function BuyAssetDialog({ isOpen, setIsOpen, asset }: IBuyAssetDialog) {
         Number(values.price)
       );
       setIsOpen(false);
+      formik.setErrors({});
     },
   });
 
@@ -77,6 +78,7 @@ export function BuyAssetDialog({ isOpen, setIsOpen, asset }: IBuyAssetDialog) {
       formik.setFieldValue("assetName", asset.name);
       formik.setFieldValue("price", asset.value);
       formik.setFieldValue("purchaseDate", localDateInStringFormat());
+      formik.setErrors({});
     };
     fillOutForm();
   }, []);
@@ -195,7 +197,10 @@ export function BuyAssetDialog({ isOpen, setIsOpen, asset }: IBuyAssetDialog) {
             </div>
 
             <Dialog.Close asChild>
-              <button className="absolute transition-all top-4 right-4 hover:scale-125">
+              <button
+                onClick={() => formik.setErrors({})}
+                className="absolute transition-all top-4 right-4 hover:scale-125"
+              >
                 <IoMdClose className="text-[26px]" />
               </button>
             </Dialog.Close>
