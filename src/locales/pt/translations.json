@@ -1,5 +1,9 @@
 {
-  "common": {},
+  "common": {
+    "remove": "Remover",
+    "delete": "Apagar",
+    "cancel": "Cancelar"
+  },
   "private": {
     "homepage": {
       "breadcrumb": {
@@ -35,7 +39,48 @@
         "delete": "Excluir",
         "showing": "Monstrando",
         "result": "resultado",
-        "results": "resultados"
+        "results": "resultados",
+        "dialogs": {
+          "add-asset": {
+            "title": "Adicionar ativo",
+            "asset-name": "Ticker do ativo",
+            "asset-name-placeholder": "Digite o nome do ativo",
+            "asset-name-required": "Ticker do ativo é obrigatório",
+            "asset-date": "Data de compra",
+            "asset-date-placeholder": "Selecione a data",
+            "asset-date-required": "Data de compra é obrigatória",
+            "asset-quantity": "Quantidade",
+            "asset-quantity-placeholder": "1",
+            "asset-quantity-required": "Quantidade é obrigatória",
+            "asset-quantity-positive": "Quantidade deve ser maior que zero",
+            "asset-quantity-integer": "Quantidade deve ser um número inteiro",
+            "asset-price": "Cotação",
+            "asset-price-placeholder": "00,00",
+            "asset-price-required": "Cotação é obrigatória",
+            "asset-price-positive": "Cotação deve ser maior que zero",
+            "stock-type": "Tipo de ativo",
+            "stock-type-required": "Tipo de ativo é obrigatório",
+            "select-placeholder": "Selectione o tipo",
+            "stock": "Ação",
+            "fii": "Fundo Imobiliário",
+            "fixed-income": "Renda fixa",
+            "crypto": "Criptomoeda",
+            "total": "Total:",
+            "button": "Adicionar Ativo"
+          },
+          "delete-asset": {
+            "title": "Tem certeza que deseja remover"
+          },
+          "buy-asset": {
+            "title": "Nova Compra",
+            "add-buy": "Adicionar Compra"
+          },
+          "sale-asset": {
+            "title": "Nova Venda",
+            "asset-quantity-max": "Você só tem {{availableQuantity}} ativos disponíveis para remover.",
+            "add-sale": "Adicionar Venda"
+          }
+        }
       },
       "footer": {
         "title": "todos os direitos reservados"

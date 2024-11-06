@@ -9,6 +9,8 @@ export const buttonVariants = cva(
       variant: {
         primary:
           "bg-primary text-primary-foreground shadow hover:bg-primary/80 text-white px-6",
+        error:
+          "text-primary-foreground shadow hover:bg-red-300 hover:text-red-500 px-6",
         light:
           "bg-gray-50 text-gray-900 shadow hover:bg-gray-50/80 hover:text-gray-900/90",
         dark: "bg-gray-900 text-foreground shadow hover:bg-gray-800 hover:text-foreground/90 text-white",

@@ -13,6 +13,7 @@ interface SelectProps {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
   className?: string;
+  placeholder: string;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -23,6 +24,7 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   onBlur,
   className = "",
+  placeholder,
 }) => {
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
@@ -37,7 +39,7 @@ const Select: React.FC<SelectProps> = ({
         onBlur={onBlur}
         className="p-2 border border-gray-300 rounded-lg outline-none focus:border-blue-500"
       >
-        <option value="">Selecione o tipo</option>
+        <option value="">{placeholder}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

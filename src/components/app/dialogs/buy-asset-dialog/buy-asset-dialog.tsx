@@ -1,25 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Input from "@/components/shared/input/input";
 import * as Dialog from "@radix-ui/react-dialog";
-import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Select from "@/components/shared/select/select";
 import { Button } from "@/components/ui/button/button";
 import { FaPlus } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 import { usePortfolio } from "@/context/assets-context";
+import { AssetData } from "@/types/assets";
+import { useEffect } from "react";
 import { localDateInStringFormat } from "@/utils/utils";
 
-interface IAddAssetDialog {
-  children: React.ReactNode;
+interface IBuyAssetDialog {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  asset: AssetData;
 }
 
-export function AddAssetDialog({ children }: IAddAssetDialog) {
+export function BuyAssetDialog({ isOpen, setIsOpen, asset }: IBuyAssetDialog) {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
-  const { handleAddAsset } = usePortfolio();
+  const { handleUpdateAsset } = usePortfolio();
 
   const validationSchema = Yup.object().shape({
     assetName: Yup.string().required(
@@ -51,9 +52,6 @@ export function AddAssetDialog({ children }: IAddAssetDialog) {
       .positive(
         t("private.homepage.assets-list.dialogs.add-asset.asset-price-positive")
       ),
-    assetType: Yup.string().required(
-      t("private.homepage.assets-list.dialogs.add-asset.stock-type-required")
-    ),
   });
 
   const formik = useFormik({
@@ -62,43 +60,22 @@ export function AddAssetDialog({ children }: IAddAssetDialog) {
       purchaseDate: "",
       quantity: "1",
       price: "",
-      assetType: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      const data = {
-        code: values.assetName.toUpperCase().slice(0, 2),
-        name: values.assetName,
-        type: values.assetType,
-        value: Number(values.price),
-        quantity: Number(values.quantity),
-      };
-      handleAddAsset(data);
+      handleUpdateAsset(
+        values.assetName,
+        Number(values.quantity),
+        Number(values.price)
+      );
       setIsOpen(false);
     },
   });
 
-  const selectOptions = [
-    {
-      value: "Ação",
-      label: t("private.homepage.assets-list.dialogs.add-asset.stock"),
-    },
-    {
-      value: "Fundo Imobiliário",
-      label: t("private.homepage.assets-list.dialogs.add-asset.fii"),
-    },
-    {
-      value: "Renda Fixa",
-      label: t("private.homepage.assets-list.dialogs.add-asset.fixed-income"),
-    },
-    {
-      value: "Criptomoeda",
-      label: t("private.homepage.assets-list.dialogs.add-asset.crypto"),
-    },
-  ];
-
   useEffect(() => {
     const fillOutForm = () => {
+      formik.setFieldValue("assetName", asset.name);
+      formik.setFieldValue("price", asset.value);
       formik.setFieldValue("purchaseDate", localDateInStringFormat());
     };
     fillOutForm();
@@ -106,7 +83,6 @@ export function AddAssetDialog({ children }: IAddAssetDialog) {
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-50" />
         <Dialog.Content
@@ -118,28 +94,21 @@ export function AddAssetDialog({ children }: IAddAssetDialog) {
             className="relative w-full max-w-md p-6 bg-white rounded-lg shadow-lg"
           >
             <Dialog.Title id="modal-title" className="text-xl font-bold">
-              {t("private.homepage.assets-list.dialogs.add-asset.title")}
+              {t("private.homepage.assets-list.dialogs.buy-asset.title")}
             </Dialog.Title>
             <div className="flex flex-col gap-4 mt-4">
-              <div>
-                <Input
-                  label={t(
-                    "private.homepage.assets-list.dialogs.add-asset.asset-name"
-                  )}
-                  placeholder={t(
-                    "private.homepage.assets-list.dialogs.add-asset.asset-name-placeholder"
-                  )}
-                  value={formik.values.assetName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  name="assetName"
-                />
-                {formik.touched.assetName && formik.errors.assetName && (
-                  <p className="ml-2 text-sm text-red-500">
-                    {formik.errors.assetName}
-                  </p>
+              <Input
+                label={t(
+                  "private.homepage.assets-list.dialogs.add-asset.asset-name"
                 )}
-              </div>
+                placeholder={t(
+                  "private.homepage.assets-list.dialogs.add-asset.asset-name-placeholder"
+                )}
+                value={formik.values.assetName}
+                onChange={() => null}
+                onBlur={formik.handleBlur}
+                name="assetName"
+              />
 
               <div>
                 <Input
@@ -205,27 +174,6 @@ export function AddAssetDialog({ children }: IAddAssetDialog) {
                 )}
               </div>
 
-              <div className="flex flex-col gap-1">
-                <Select
-                  label={t(
-                    "private.homepage.assets-list.dialogs.add-asset.stock-type"
-                  )}
-                  placeholder={t(
-                    "private.homepage.assets-list.dialogs.add-asset.select-placeholder"
-                  )}
-                  name="assetType"
-                  value={formik.values.assetType}
-                  options={selectOptions}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.assetType && formik.errors.assetType && (
-                  <p className="ml-2 text-sm text-red-500">
-                    {formik.errors.assetType}
-                  </p>
-                )}
-              </div>
-
               <div className="flex items-center justify-between mt-4">
                 <p className="text-sm font-medium text-gray-700">
                   {t("private.homepage.assets-list.dialogs.add-asset.total")} R${" "}
@@ -241,7 +189,7 @@ export function AddAssetDialog({ children }: IAddAssetDialog) {
                   leftIcon={<FaPlus className="mr-2 text-[11px]" />}
                   size="sm"
                 >
-                  {t("private.homepage.assets-list.dialogs.add-asset.button")}
+                  {t("private.homepage.assets-list.dialogs.buy-asset.add-buy")}
                 </Button>
               </div>
             </div>

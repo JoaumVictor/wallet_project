@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import {
   FaAngleDoubleLeft,
@@ -28,9 +28,11 @@ export function AssetsList({ className }: IGrossBalance) {
   const { assets } = usePortfolio();
 
   const filteredLogs = useMemo(() => {
-    return assets?.filter((each) =>
-      each.name.toLowerCase().includes(filterByName.toLowerCase())
-    );
+    return assets
+      ?.filter((each) =>
+        each.name.toLowerCase().includes(filterByName.toLowerCase())
+      )
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, [assets, filterByName]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -38,6 +40,10 @@ export function AssetsList({ className }: IGrossBalance) {
     startIndex,
     startIndex + itemsPerPage
   );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
 
   return (
     <div
@@ -72,9 +78,11 @@ export function AssetsList({ className }: IGrossBalance) {
       </div>
 
       <div className="flex flex-col w-full h-full gap-4 overflow-y-scroll">
-        {currentItems.map((each, i) => (
-          <AssetCard key={each.code} data={each} index={i} />
-        ))}
+        {currentItems
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((each, i) => (
+            <AssetCard key={each.code} data={each} index={i} />
+          ))}
       </div>
 
       <div className="flex items-center justify-between w-full mt-4">

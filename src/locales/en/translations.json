@@ -1,5 +1,9 @@
 {
-  "common": {},
+  "common": {
+    "remove": "Remove",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
   "private": {
     "homepage": {
       "breadcrumb": {
@@ -35,7 +39,48 @@
         "delete": "Delete",
         "showing": "Showing",
         "result": "result",
-        "results": "results"
+        "results": "results",
+        "dialogs": {
+          "add-asset": {
+            "title": "Add Asset",
+            "asset-name": "Asset Ticker",
+            "asset-name-placeholder": "Enter asset ticker",
+            "asset-name-required": "Asset ticker is required",
+            "asset-date": "Purchase Date",
+            "asset-date-placeholder": "Select date",
+            "asset-date-required": "Purchase date is required",
+            "asset-quantity": "Quantity",
+            "asset-quantity-placeholder": "1",
+            "asset-quantity-required": "Quantity is required",
+            "asset-quantity-positive": "Quantity must be greater than zero",
+            "asset-quantity-integer": "Quantity must be an integer",
+            "asset-price": "Price",
+            "asset-price-placeholder": "00.00",
+            "asset-price-required": "Price is required",
+            "asset-price-positive": "Price must be greater than zero",
+            "stock-type": "Asset Type",
+            "stock-type-required": "Asset type is required",
+            "select-placeholder": "Select type",
+            "stock": "Stock",
+            "fii": "Real Estate Fund",
+            "fixed-income": "Fixed Income",
+            "crypto": "Cryptocurrency",
+            "total": "Total:",
+            "button": "Add Asset"
+          },
+          "delete-asset": {
+            "title": "Are you sure you want to remove"
+          },
+          "buy-asset": {
+            "title": "New Purchase",
+            "add-buy": "Add Purchase"
+          },
+          "sale-asset": {
+            "title": "New Sale",
+            "asset-quantity-max": "You only have {{availableQuantity}} available assets to remove.",
+            "add-sale": "Add Sale"
+          }
+        }
       },
       "footer": {
         "title": "all rights reserved"
